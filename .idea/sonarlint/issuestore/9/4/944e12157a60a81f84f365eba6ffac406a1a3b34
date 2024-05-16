@@ -1,0 +1,9 @@
+
+•
+java:S1598"ÙThis file "PostRepository.java" should be located in "ru\netology\repository" directory, not in "D:\Java projects\SpringWebMVC\SpringWebMVC2.3\src\main\java\ru.netology\repository"(Do not use dots in directory names).(½®¹-J$b854f21f-6673-4759-bb75-128626c270fe
+
+java:S1128"ERemove this unused import 'org.springframework.stereotype.Component'.(Ş÷Ñ¸ÿÿÿÿÿ8„îá¹õ1J$2cda2e90-3a23-4017-a77f-a53d9e80defe
+‡
+java:S1128"FRemove this unused import 'java.util.concurrent.atomic.AtomicBoolean'.(§­‹¼üÿÿÿÿJ$11e0593e-38d9-41bb-9946-67f774b2e122
+‡
+java:S1128	"FRemove this unused import 'java.util.concurrent.atomic.AtomicInteger'.(¿êäœøÿÿÿÿJ$60f1047e-ff7c-413e-927a-660ac3d949c6
