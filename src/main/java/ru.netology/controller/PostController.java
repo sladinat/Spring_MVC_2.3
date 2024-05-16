@@ -1,52 +1,46 @@
 package ru.netology.controller;
-import com.google.gson.Gson;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import ru.netology.model.Post;
 import ru.netology.service.PostService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/api/posts")
 public class PostController {
-    public static final String APPLICATION_JSON = "application/json";
-    private final PostService service;
 
-    public PostController(PostService service) {
-        this.service = service;
-    }
+	public static final String APPLICATION_JSON = "application/json";
+	private final PostService service;
 
-    @GetMapping
-    public void all(HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        final var data = service.all();
-        final var gson = new Gson();
-        response.getWriter().print(gson.toJson(data));
-    }
+	public PostController(PostService service) {
+		this.service = service;
+	}
 
-    @GetMapping("/{id}")
-    public void getById(@PathVariable long id, HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        final var gson = new Gson();
-        final var post = service.getById(id);
-        response.getWriter().print(gson.toJson(post));
-    }
+	@GetMapping
+	public ResponseEntity<List<Post>> all() {
+		return ResponseEntity.ok().body(service.all());
+	}
 
-    @PostMapping
-    public void save(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType(APPLICATION_JSON);
-        final var gson = new Gson();
-        final var post = gson.fromJson(request.getReader(), Post.class);
-        final var data = service.save(post);
-        response.getWriter().print(gson.toJson(data));
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<Post> getById(@PathVariable long id) {
+		return ResponseEntity.ok().body(service.getById(id));
+	}
 
-    @DeleteMapping("/{id}")
-    //@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
-    public void removeById(@PathVariable long id, HttpServletResponse response) {
-        service.removeById(id);
-    }
+	@PostMapping
+	public ResponseEntity<Post> save(Post post) {
+		return ResponseEntity.ok().body(service.save(post));
+	}
+
+	@DeleteMapping("/{id}")
+	public void removeById(@PathVariable long id) {
+		service.removeById(id);
+	}
 }
